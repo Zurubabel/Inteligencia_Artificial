@@ -35,5 +35,10 @@ public class Labirinto {
 			System.out.println("");
 		}
 	}
+
+	public int getTamanhoLabirinto() {
+		
+		return this.tamanhoLabirinto;
+	}
 	
 }
