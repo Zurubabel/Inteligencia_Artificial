@@ -15,8 +15,22 @@ public class AgenteLabirinto {
 
 	public AgenteLabirinto(Labirinto labirinto) {
 		this.labirinto = labirinto;
+		labirinto.setAgente(this);
 		this.posXY = new PosicaoXY();
 		this.movimento = MovimentosAgenteLabirinto.CIMA;
+	}
+	
+	public void movimentar() {
+		PosicaoXY proximoMovimento = retornarMovimento();
+		
+		String valor = this.labirinto.retornarValorPosicaoLabirinto(proximoMovimento);
+		
+		if (valor.equals("L") || valor.equals("*A*")) {
+			
+		} else {
+			this.labirinto.limpar();
+			this.posXY = proximoMovimento;
+		}
 	}
 	
 	public PosicaoXY retornarMovimento() {
@@ -45,6 +59,10 @@ public class AgenteLabirinto {
 				break;
 		}
 		return new PosicaoXY(retornoPosX, retornoPosY);
+	}
+
+	public PosicaoXY getPosicao() {
+		return this.posXY;
 	}
 	
 }
