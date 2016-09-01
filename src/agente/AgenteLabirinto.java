@@ -91,5 +91,18 @@ public class AgenteLabirinto {
 	public PosicaoXY getPosicao() {
 		return this.posXY;
 	}
+
+	public boolean isAindaLimpando() {
+		return pilhaMovimentos < 4;
+	}
+
+	public void zerarPilha() {
+		this.pilhaMovimentos = 0;
+	}
+
+	public void setPosicao(PosicaoXY posicaoXY) {
+		this.posXY = posicaoXY;
+		
+	}
 	
 }

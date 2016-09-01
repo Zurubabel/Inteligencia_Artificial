@@ -33,11 +33,25 @@ public class Labirinto {
 	}
 	
 	public void exibirLabirinto() {
+		atualizarPosicaoAgente();
 		for (int i = 0; i < tamanhoLabirinto; i++) {
 			for (int j = 0; j < tamanhoLabirinto; j++) {
-				System.out.print("| " + labirinto[i][j] + " |");
+				if (labirinto[i][j].equals("*A*")) {
+					System.out.print("|" + labirinto[i][j] + "|");
+				} else {
+					System.out.print("| " + labirinto[i][j] + " |");
+				}
+				
 			}
 			System.out.println("");
+		}
+		System.out.println("");
+	}
+
+	private void atualizarPosicaoAgente() {
+		if (this.agente != null) {
+			PosicaoXY posAgente = this.agente.getPosicao();
+			labirinto[posAgente.getPosX()][posAgente.getPosY()] = "*A*";
 		}
 	}
 
