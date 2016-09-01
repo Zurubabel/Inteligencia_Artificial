@@ -12,6 +12,8 @@ public class AgenteLabirinto {
 	private MovimentosAgenteLabirinto movimento;
 	
 	private PosicaoXY posXY;
+	
+	private int pilhaMovimentos;
 
 	public AgenteLabirinto(Labirinto labirinto) {
 		this.labirinto = labirinto;
@@ -21,18 +23,43 @@ public class AgenteLabirinto {
 	}
 	
 	public void movimentar() {
+		if (this.pilhaMovimentos >= 4) {
+			return;
+		}
 		PosicaoXY proximoMovimento = retornarMovimento();
-		
 		String valor = this.labirinto.retornarValorPosicaoLabirinto(proximoMovimento);
 		
 		if (valor.equals("L") || valor.equals("*A*")) {
-			
+			proximoMovimento();
+			aumentarPilha();
+			movimentar();
 		} else {
 			this.labirinto.limpar();
 			this.posXY = proximoMovimento;
 		}
 	}
 	
+	private void aumentarPilha() {
+		this.pilhaMovimentos++;
+	}
+
+	private void proximoMovimento() {
+		switch(this.movimento) {
+			case CIMA:
+				this.movimento = MovimentosAgenteLabirinto.BAIXO;
+				break;
+			case BAIXO:
+				this.movimento = MovimentosAgenteLabirinto.ESQUERDA;
+				break;
+			case ESQUERDA:
+				this.movimento = MovimentosAgenteLabirinto.DIREITA;
+				break;
+			case DIREITA:
+				this.movimento = MovimentosAgenteLabirinto.CIMA;
+				break;
+		}
+	}
+
 	public PosicaoXY retornarMovimento() {
 		int retornoPosX = this.posXY.getPosX();
 		int retornoPosY = this.posXY.getPosY();
